@@ -1,0 +1,28 @@
+{
+    "name": "zakariajawas/permissions-generator",
+    "description": "Generate baseic permissions for spaite permissions package according to your models",
+    "type": "library",
+    "keywords": [
+        "permissions",
+        "generator",
+        "php",
+        "laravel",
+        "database"
+    ],
+    "autoload": {
+        "psr-4": {
+            "Zakariajawas\\PermissionsGenerator\\": "src/"
+        }
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Zakaria Jawas",
+            "email": "jawas.zakaria@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=7.4",
+        "spatie/laravel-permission": ">=5.5"
+    }
+}
