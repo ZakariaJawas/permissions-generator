@@ -13,14 +13,14 @@ class GeneratePermissionsProvider extends ServiceProvider {
         ]);
 
         $this->publishes([
-            __DIR__.'/../config/permissionsgenerator.php' =>  config_path('permissionsgenerator.php'),
+            __DIR__.'/config/permissionsgenerator.php' =>  config_path('permissionsgenerator.php'),
         ], 'config');
     }
 
     public function register()
     {
         $this->mergeConfigFrom(
-            __DIR__.'/../config/permissionsgenerator.php', 'permissionsgenerator'
+            __DIR__.'/config/permissionsgenerator.php', 'permissionsgenerator'
         );
     }
 }
