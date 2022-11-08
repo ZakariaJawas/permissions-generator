@@ -1,5 +1,5 @@
 # Permissions Generator
-<img src="https://img.shields.io/packagist/v/zakariajawas/permissions-generator.svg?style=flat-square" /> <img src="https://camo.githubusercontent.com/c0e68a5e33b5acc6165a845d9448c0094c3ce70eb393f365f1e3a3adb06672d5/68747470733a2f2f696d672e736869656c64732e696f2f7061636b61676973742f7068702d762f6e65757230746f78696e652f706f636b2e7376673f6c6f676f3d706870266c6f676f436f6c6f723d7768697465267374796c653d666c61742d737175617265" /> 
+<img src="https://img.shields.io/packagist/v/zakariajawas/permissions-generator.svg?style=flat-square" /> <img src="https://camo.githubusercontent.com/c0e68a5e33b5acc6165a845d9448c0094c3ce70eb393f365f1e3a3adb06672d5/68747470733a2f2f696d672e736869656c64732e696f2f7061636b61676973742f7068702d762f6e65757230746f78696e652f706f636b2e7376673f6c6f676f3d706870266c6f676f436f6c6f723d7768697465267374796c653d666c61742d737175617265" /> ![Licence](https://img.shields.io/github/license/ZakariaJawas/permissions-generator) ![Stars](https://img.shields.io/github/stars/ZakariaJawas/permissions-generator)
 
 Generate basic permissions for spatie permissions package for all your models at once using one artisan command.
 
@@ -75,3 +75,14 @@ Result will be `can create product` instead of `create product`
 ## License
 
 The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
+
+## Author
+Zakaria Jawas [@zakariajawas](https://twitter.com/zakariajawas)
+
+## Getting help
+If you spot a problem you can open an issue on the Github page, or alternatively, you can contact me via `jawas.zakaria@gmail.com`
+
+Support the library by twitting in ![twitter](https://img.shields.io/twitter/url?url=https%3A%2F%2Fgithub.com%2FZakariaJawas%2Fpermissions-generator%2F
+)
+
+If you enjoy it, please make this library better :+1:
