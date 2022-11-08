@@ -39,14 +39,14 @@ Add the service provider in your `config/app.php` file:
 ```php
 'providers' => [
     // ...
-    \ZakariaJawas\PermissionsGenerator\Providers\GeneratePermissionsProvider::class,
+    \ZakariaJawas\PermissionsGenerator\GeneratePermissionsProvider::class,
 ];
 ```
 
 You should publish the config/permissionsgenerator.php config file with:
 
 ```php
-php artisan vendor:publish --provider="ZakariaJawas\PermissionsGenerator\Providers\GeneratePermissionsProvider"
+php artisan vendor:publish --provider="ZakariaJawas\PermissionsGenerator\GeneratePermissionsProvider"
 ```
 
 ### Working with config file

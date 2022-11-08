@@ -1,5 +1,5 @@
 <?php
-namespace ZakariaJawas\PermissionsGenerator\Providers;
+namespace ZakariaJawas\PermissionsGenerator;
 use Illuminate\Support\ServiceProvider;
 
 class GeneratePermissionsProvider extends ServiceProvider {
