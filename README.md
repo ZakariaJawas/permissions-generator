@@ -82,7 +82,6 @@ Zakaria Jawas [@zakariajawas](https://twitter.com/zakariajawas)
 ## Getting help
 If you spot a problem you can open an issue on the Github page, or alternatively, you can contact me via `jawas.zakaria@gmail.com`
 
-Support the library by twitting in ![twitter](https://img.shields.io/twitter/url?url=https%3A%2F%2Fgithub.com%2FZakariaJawas%2Fpermissions-generator%2F
-)
+Support the library by twitting in  ![Twitter](https://img.shields.io/twitter/url?url=https%3A%2F%2Fgithub.com%2FZakariaJawas%2Fpermissions-generator%2F)
 
 If you enjoy it, please make this library better :+1:
