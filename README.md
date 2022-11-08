@@ -8,13 +8,13 @@ This package contains a `GeneratePermissionsProvider` that you can use in your p
 ## What It Does
 If you are using spatie permissions package, you need to create permissions for roles manually, common permissions for all models are access (list), create, edit and delete
 
-This package will create all the base permissions for all models using only one artisan command.
+This package will create all the basic permissions for all models using only one artisan command.
 
 ```php
 php artisan permissions:generate
 ```
 
-If you have the following models [Category, Product], after running the generate command, the following rows will be inserted in your permissions table
+If you have the following models [Category, Product] as example, after running the generate command, the following rows will be inserted in your permissions table
 ```
 list category
 create category
@@ -43,9 +43,9 @@ php artisan vendor:publish --provider="ZakariaJawas\PermissionsGenerator\Generat
 ### Working with config file
 In config/permissionsgenerator.php file you can modify the following values.
 
-- You can modify the following value to add, update or delete a permission.
+- Modify this value to add, update or delete a permission.
  
- There are the basic permissions.
+ These are the basic permissions.
 ```php
 'permissions' => ['list', 'create', 'edit', 'delete']
 ```
@@ -57,19 +57,19 @@ For example to add **access** permission and change **edit** to **update** you c
 - By default the package will generate the permissions for all project models, you might want to exclude specific one or more models so you can do this.
 ```php
 'exclude' => [
-App\Models\Sessions::class,
+App\Models\Session::class, //no permissions generated for Session model
 ],
 ```
 Note:-
 
 1) You have to add the full model class path.
-2) You don't have to exclude other packages models, the package won't create permissions for them.
+2) You don't have to exclude other packages models, this package won't create permissions for them.
 
-- Default permissions name is the `permission + model name`, if you want to add a prefix you can specify it here.
+- Default permissions name is `permission + model name`, if you want to add a prefix you can specify it here.
 ```php
 'prefix' => 'can',
 ```
-Result will be `can access product` instead of `access product`
+Result will be `can create product` instead of `create product`
 
 
 ## License
