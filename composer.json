@@ -1,6 +1,6 @@
 {
     "name": "zakariajawas/permissions-generator",
-    "description": "Generate baseic permissions for spaite permissions package according to your models",
+    "description": "Generate baseic permissions for spatie permissions package according to your models",
     "type": "library",
     "keywords": [
         "permissions",
