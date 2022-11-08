@@ -34,15 +34,6 @@ Note: You can modify some values inside the config file, check **Working with co
 composer require zakariajawas/permissions-generator
 ```
 
-Add the service provider in your `config/app.php` file:
-
-```php
-'providers' => [
-    // ...
-    \ZakariaJawas\PermissionsGenerator\GeneratePermissionsProvider::class,
-];
-```
-
 You should publish the config/permissionsgenerator.php config file with:
 
 ```php
