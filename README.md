@@ -1,4 +1,6 @@
 # Permissions Generator
+<img src="https://img.shields.io/packagist/v/zakariajawas/permissions-generator.svg?style=flat-square" /> <img src="https://camo.githubusercontent.com/c0e68a5e33b5acc6165a845d9448c0094c3ce70eb393f365f1e3a3adb06672d5/68747470733a2f2f696d672e736869656c64732e696f2f7061636b61676973742f7068702d762f6e65757230746f78696e652f706f636b2e7376673f6c6f676f3d706870266c6f676f436f6c6f723d7768697465267374796c653d666c61742d737175617265" /> 
+
 Generate basic permissions for spatie permissions package for all your models at once using one artisan command.
 
 This package contains a `GeneratePermissionsProvider` that you can use in your packages to easily register the config file and the artisan command.
