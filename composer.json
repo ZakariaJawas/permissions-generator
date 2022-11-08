@@ -11,7 +11,14 @@
     ],
     "autoload": {
         "psr-4": {
-            "Zakariajawas\\PermissionsGenerator\\": "src/"
+            "ZakariaJawas\\PermissionsGenerator\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "ZakariaJawas\\PermissionsGenerator\\GeneratePermissionsProvider"
+            ]
         }
     },
     "license": "MIT",
