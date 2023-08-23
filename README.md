@@ -60,6 +60,12 @@ For example to add **access** permission and change **edit** to **update** you c
 App\Models\Session::class, //no permissions generated for Session model
 ],
 ```
+
+- If you have static permissions which are not related to models for example export to pdf or access all data or maybe a page which doesn't have a model you can add these permisisons in $staticPermissions array
+```php
+'staticPermissions' => ['export pdf', 'access dashboard']
+```
+
 Note:-
 
 1) You have to add the full model class path.
