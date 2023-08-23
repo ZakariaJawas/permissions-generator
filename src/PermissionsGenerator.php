@@ -40,6 +40,16 @@ class PermissionsGenerator {
             $this->generatePermissions($model);
         } //end for each
 
+
+        $staticQuery = [];
+        $staticPermissions = Config::get('permissionsgenerator.staticPermissions');
+        foreach($staticPermissions as $permission) {
+
+            $staticQuery[] = ['name' => $permission, 'guard_name' => 'web'];
+        } //end foreach
+
+        $this->insertPermissions($staticQuery);
+
         return "Permissions are generated, check your table.\n";
     }
 
@@ -128,6 +138,11 @@ class PermissionsGenerator {
             } //end if            
         } //end for
         
-        DB::table('permissions')->insert($query);
+        $this->insertPermissions($query);
+    }
+
+    private function insertPermissions($query) {
+        
+        DB::table('permissions')->insertOrIgnore($query);
     }
 }

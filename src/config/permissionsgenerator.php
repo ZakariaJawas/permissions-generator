@@ -46,6 +46,19 @@ return [
     | to add access permission 
     | 'permissions' => ['access', 'list', 'create', 'update', 'delete']
     */
-    'permissions' => ['list', 'create', 'edit', 'delete']
-
+    'permissions' => ['list', 'create', 'edit', 'delete'],
+    /*
+    |--------------------------------------------------------------------------
+    | staticPermissions
+    |--------------------------------------------------------------------------
+    |
+    | This option contains static permissions which not related to model the generator will use to create.
+    | Default static permissions are empty list
+    | 
+    | To add static permissions add them to the list
+    |
+    | Example
+    | 'staticPermissions' => ['export pdf', 'access all users data'],
+    */
+    'staticPermissions' => [],
 ];
