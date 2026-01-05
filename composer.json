@@ -1,35 +1,35 @@
 {
-    "name": "zakariajawas/permissions-generator",
-    "description": "Generate default permissions for spatie permissions package according to your models",
-    "type": "library",
-    "keywords": [
-        "permissions",
-        "generator",
-        "php",
-        "laravel",
-        "database"
-    ],
-    "autoload": {
-        "psr-4": {
-            "ZakariaJawas\\PermissionsGenerator\\": "src/"
-        }
-    },
-    "extra": {
-        "laravel": {
-            "providers": [
-                "ZakariaJawas\\PermissionsGenerator\\GeneratePermissionsProvider"
-            ]
-        }
-    },
-    "license": "MIT",
-    "authors": [
-        {
-            "name": "Zakaria Jawas",
-            "email": "jawas.zakaria@gmail.com"
-        }
-    ],
-    "require": {
-        "php": ">=7.4",
-        "spatie/laravel-permission": ">=5.5"
+  "name": "zakariajawas/permissions-generator",
+  "description": "Generate default permissions for spatie permissions package according to your models",
+  "type": "library",
+  "keywords": [
+    "permissions",
+    "generator",
+    "php",
+    "laravel",
+    "database"
+  ],
+  "autoload": {
+    "psr-4": {
+      "ZakariaJawas\\PermissionsGenerator\\": "src/"
     }
+  },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "ZakariaJawas\\PermissionsGenerator\\Providers\\GeneratePermissionsProvider"
+      ]
+    }
+  },
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Zakaria Jawas",
+      "email": "jawas.zakaria@gmail.com"
+    }
+  ],
+  "require": {
+    "php": ">=7.4",
+    "spatie/laravel-permission": ">=5.5"
+  }
 }

@@ -1,6 +1,7 @@
-<?php 
+<?php
 
 namespace ZakariaJawas\PermissionsGenerator;
+
 use Illuminate\Container\Container;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
@@ -9,17 +10,26 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Schema;
 
-class PermissionsGenerator {
+class PermissionsGenerator
+{
+    /**
+     * Collected generated permissions rows to return for display
+     *
+     * @var array
+     */
+    private $generated = [];
 
     /**
      * Generate permissions for your project models
      */
-    public function generate() {
+    public function generate()
+    {
 
         //check if permissions table exists
         if (!Schema::hasTable('permissions')) {
 
-            return "Please install spatie permissions package first, and run php artisan migrate then run permissions:generate command";
+            $this->error("Please install Spatie permissions package first, and run php artisan migrate then run permissions:generate command");
+            return;
         } //end if
 
         //get project models
@@ -28,14 +38,17 @@ class PermissionsGenerator {
         //check if project conains any models
         if (count($models) == 0) {
 
-            return "You don't have any models yet, create models then run the command again\n";            
+            $this->warn(
+                "You don't have any models yet, create models then run the command again"
+            );
+            return;
         } //end if
-        
-        
+
+
         //process models => extract models names and convert it it permission style name
         $processedModels = $this->processModels($models);
-        
-        foreach($processedModels as $model) {
+
+        foreach ($processedModels as $model) {
 
             $this->generatePermissions($model);
         } //end for each
@@ -43,14 +56,33 @@ class PermissionsGenerator {
 
         $staticQuery = [];
         $staticPermissions = Config::get('permissionsgenerator.staticPermissions');
-        foreach($staticPermissions as $permission) {
+        foreach ($staticPermissions as $permission) {
 
             $staticQuery[] = ['name' => $permission, 'guard_name' => 'web'];
         } //end foreach
 
-        $this->insertPermissions($staticQuery);
+        // only insert static permissions that don't already exist
+        $staticNames = array_map(function ($r) {
+            return $r['name'];
+        }, $staticQuery);
 
-        return "Permissions are generated, check your table.\n";
+        if (count($staticNames) > 0) {
+            $existingStatic = DB::table('permissions')->whereIn('name', $staticNames)->pluck('name')->toArray();
+
+            $staticToInsert = array_values(array_filter($staticQuery, function ($r) use ($existingStatic) {
+                return !in_array($r['name'], $existingStatic);
+            }));
+
+            if (count($staticToInsert) > 0) {
+                $this->insertPermissions($staticToInsert);
+                foreach ($staticToInsert as $row) {
+                    $this->generated[] = $row;
+                }
+            }
+        }
+
+        // return generated rows for display in command
+        return $this->generated;
     }
 
 
@@ -60,14 +92,16 @@ class PermissionsGenerator {
      */
     private function getModels(): Collection
     {
-        
+
         $models = collect(File::allFiles(app_path()))
             ->map(function ($item) {
                 $path = $item->getRelativePathName();
-                                
-                $class = sprintf('\%s%s',
+
+                $class = sprintf(
+                    '\%s%s',
                     Container::getInstance()->getNamespace(),
-                    strtr(substr($path, 0, strrpos($path, '.')), '/', '\\'));
+                    strtr(substr($path, 0, strrpos($path, '.')), '/', '\\')
+                );
 
                 return $class;
             })
@@ -76,7 +110,7 @@ class PermissionsGenerator {
 
                 if (class_exists($class)) {
                     $reflection = new \ReflectionClass($class);
-                                        
+
                     $valid = $reflection->isSubclassOf(Model::class) &&
                         !$reflection->isAbstract() && !(array_search($reflection->name, Config::get("permissionsgenerator.exclude"), false) > -1);
                 }
@@ -96,7 +130,8 @@ class PermissionsGenerator {
      * @param Collection $models
      * @return Array
      */
-    private function processModels(Collection $models) {
+    private function processModels(Collection $models)
+    {
 
         $result = [];
         foreach ($models as $model) {
@@ -110,7 +145,7 @@ class PermissionsGenerator {
 
             $name = strtolower(implode(' ',  $matches));
             $result[] = $name;
-        } 
+        }
         return $result;
     }
 
@@ -118,31 +153,53 @@ class PermissionsGenerator {
      * Used to generate the permissions for a model and insert it to database
      * @param string $model
      */
-    private function generatePermissions($model) {
+    private function generatePermissions($model)
+    {
 
         //get prefix value from config file
-        $prefix = Config::get("permissionsgenerator.prefix");        
+        $prefix = Config::get("permissionsgenerator.prefix");
 
         //get permissions values from config file
         $permissions = Config::get("permissionsgenerator.permissions");
 
         $query = [];
-        foreach($permissions as $permission) {
+        foreach ($permissions as $permission) {
 
             if (empty($prefix)) {
 
-                $query[] = ['name' => "$permission $model", 'guard_name' => 'web'];            
+                $row = ['name' => "$permission $model", 'guard_name' => 'web'];
             } else {
-                
-                $query[] = ['name' => "$prefix $permission $model", 'guard_name' => 'web'];            
-            } //end if            
+
+                $row = ['name' => "$prefix $permission $model", 'guard_name' => 'web'];
+            } //end if
+
+            $query[] = $row;
         } //end for
-        
-        $this->insertPermissions($query);
+
+        // only insert rows that don't already exist
+        $names = array_map(function ($r) {
+            return $r['name'];
+        }, $query);
+
+        if (count($names) > 0) {
+            $existing = DB::table('permissions')->whereIn('name', $names)->pluck('name')->toArray();
+
+            $toInsert = array_values(array_filter($query, function ($r) use ($existing) {
+                return !in_array($r['name'], $existing);
+            }));
+
+            if (count($toInsert) > 0) {
+                $this->insertPermissions($toInsert);
+                foreach ($toInsert as $row) {
+                    $this->generated[] = $row;
+                }
+            }
+        }
     }
 
-    private function insertPermissions($query) {
-        
+    private function insertPermissions($query)
+    {
+
         DB::table('permissions')->insertOrIgnore($query);
     }
 }

@@ -28,9 +28,16 @@ class GeneratePermissions extends Command
      */
     public function handle()
     {
-        //do stuff
-        
-        echo (new PermissionsGenerator())->generate();
-        return Command::SUCCESS;        
+        // Generate permissions and display them as a table
+        $rows = (new PermissionsGenerator())->generate();
+
+        if (is_array($rows) && count($rows) > 0) {
+            $this->table(['name', 'guard_name'], $rows);
+            $this->info('Permissions are generated, check your table.');
+        } else {
+            $this->info('No permissions were generated.');
+        } //end if
+
+        return Command::SUCCESS;
     }
 }
